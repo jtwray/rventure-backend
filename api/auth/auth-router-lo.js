@@ -22,7 +22,7 @@ router.post('/register/', checkfor('username'), checkfor('password'), unique('la
       res.status(201).json({ saved, token })
     })
     .catch(error => {
-      res.status(500).json({ message: 'There was an error while trying to add the user to the database.', error: `|| ---${error}--- ||  ##${console.error(error)}##` })
+      res.status(500).json({ userMessage:'😜  Unable to create new user at this time. 🤓 Do try again later.🙃 ' , devMessage: 'There was an error while trying to add the user to the database.', error: `|| ---${error}--- ||  ##${console.error(error)}##` })
     })
 })
 
