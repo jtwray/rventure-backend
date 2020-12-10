@@ -1,6 +1,4 @@
-const landowner_listings=require('../math.js')
 exports.seed = async function (knex) {
-  await landowner_listings;
   // Deletes ALL existing entries
   return knex('landowner_listing').del()
     .then(function () {
