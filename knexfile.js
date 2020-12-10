@@ -10,17 +10,30 @@ module.exports = {
       directory: "./data/seeds",
     }
   },
+  // development: {
+  //   client: "pg",
+  //   connection: `postgres://${process.env.USER}:${process.env.PW}@${process.env.HOST}:${process.env.PORT}/${process.env.INSTANCE}?${process.env.OPTION1KEY}=${process.env.OPTION1VALUE}?${process.env.OPTION2KEY}=${process.env.OPTION2VALUE}`,
+  //   pool: { min: 2, max: 10 },
+  //   migrations: {
+  //     directory: "./data/migrations",
+  //   },
+  //   seeds: {
+  //     directory: "./data/seeds",
+  //   }
+  // },
+
   development: {
     client: "pg",
-    connection: `postgres://${process.env.USER}:${process.env.PW}@${process.env.HOST}:${process.env.PORT}/${process.env.INSTANCE}?${process.env.OPTION1KEY}=${process.env.OPTION1VALUE}?${process.env.OPTION2KEY}=${process.env.OPTION2VALUE}`,
+    connection: process.env._DEV2_,
     pool: { min: 2, max: 10 },
     migrations: {
       directory: "./data/migrations",
     },
     seeds: {
-      directory: "./data/seeds",
+      directory: "./data/seeds"
     }
   },
+
   testing: {
     client: "sqlite3",
     useNullAsDefault: true,

@@ -1,116 +1,12 @@
-
-exports.seed = function (knex) {
+const landowner_listings=require('../math.js')
+exports.seed = async function (knex) {
+  await landowner_listings;
   // Deletes ALL existing entries
   return knex('landowner_listing').del()
     .then(function () {
       // Inserts seed entries
       return knex('landowner_listing').insert(
-        [{
-          landowner_id: 9,
-          listing_id: 8
-        }, {
-          landowner_id: 19,
-          listing_id: 7
-        }, {
-          landowner_id: 2,
-          listing_id: 1
-        }, {
-          landowner_id: 11,
-          listing_id: 13
-        }, {
-          landowner_id: 11,
-          listing_id: 18
-        }, {
-          landowner_id: 4,
-          listing_id: 11
-        }, {
-          landowner_id: 1,
-          listing_id: 20
-        }, {
-          landowner_id: 15,
-          listing_id: 7
-        }, {
-          landowner_id: 17,
-          listing_id: 9
-        }, {
-          landowner_id: 7,
-          listing_id: 10
-        }, {
-          landowner_id: 9,
-          listing_id: 11
-        }, {
-          landowner_id: 12,
-          listing_id: 7
-        }, {
-          landowner_id: 4,
-          listing_id: 17
-        }, {
-          landowner_id: 7,
-          listing_id: 6
-        }, {
-          landowner_id: 11,
-          listing_id: 1
-        }, {
-          landowner_id: 16,
-          listing_id: 13
-        }, {
-          landowner_id: 15,
-          listing_id: 13
-        }, {
-          landowner_id: 8,
-          listing_id: 12
-        }, {
-          landowner_id: 15,
-          listing_id: 3
-        }, {
-          landowner_id: 1,
-          listing_id: 7
-        }, {
-          landowner_id: 10,
-          listing_id: 1
-        }, {
-          landowner_id: 5,
-          listing_id: 19
-        }, {
-          landowner_id: 12,
-          listing_id: 1
-        }, {
-          landowner_id: 20,
-          listing_id: 15
-        }, {
-          landowner_id: 11,
-          listing_id: 5
-        }, {
-          landowner_id: 17,
-          listing_id: 16
-        }, {
-          landowner_id: 1,
-          listing_id: 9
-        }, {
-          landowner_id: 3,
-          listing_id: 3
-        }, {
-          landowner_id: 6,
-          listing_id: 12
-        }, {
-          landowner_id: 5,
-          listing_id: 18
-        }, {
-          landowner_id: 7,
-          listing_id: 14
-        }, {
-          landowner_id: 17,
-          listing_id: 18
-        }, {
-          landowner_id: 5,
-          listing_id: 16
-        }, {
-          landowner_id: 13,
-          listing_id: 8
-        }, {
-          landowner_id: 12,
-          listing_id: 17
-        }]
+[{"landowner_id":28,"listing_id":1},{"landowner_id":59,"listing_id":2},{"landowner_id":25,"listing_id":3},{"landowner_id":30,"listing_id":4},{"landowner_id":28,"listing_id":5},{"landowner_id":39,"listing_id":6},{"landowner_id":10,"listing_id":7},{"landowner_id":81,"listing_id":8},{"landowner_id":87,"listing_id":9},{"landowner_id":15,"listing_id":10},{"landowner_id":17,"listing_id":11},{"landowner_id":69,"listing_id":12},{"landowner_id":76,"listing_id":13},{"landowner_id":65,"listing_id":14},{"landowner_id":33,"listing_id":15},{"landowner_id":29,"listing_id":16},{"landowner_id":32,"listing_id":17},{"landowner_id":92,"listing_id":18},{"landowner_id":66,"listing_id":19},{"landowner_id":7,"listing_id":20},{"landowner_id":83,"listing_id":21},{"landowner_id":93,"listing_id":22},{"landowner_id":81,"listing_id":23},{"landowner_id":24,"listing_id":24},{"landowner_id":53,"listing_id":25},{"landowner_id":49,"listing_id":26},{"landowner_id":7,"listing_id":27},{"landowner_id":17,"listing_id":28},{"landowner_id":62,"listing_id":29},{"landowner_id":73,"listing_id":30},{"landowner_id":12,"listing_id":31},{"landowner_id":71,"listing_id":32},{"landowner_id":53,"listing_id":33},{"landowner_id":65,"listing_id":34},{"landowner_id":58,"listing_id":35},{"landowner_id":42,"listing_id":36},{"landowner_id":6,"listing_id":37},{"landowner_id":6,"listing_id":38},{"landowner_id":61,"listing_id":39},{"landowner_id":69,"listing_id":40},{"landowner_id":86,"listing_id":41},{"landowner_id":3,"listing_id":42},{"landowner_id":58,"listing_id":43},{"landowner_id":29,"listing_id":44},{"landowner_id":6,"listing_id":45},{"landowner_id":72,"listing_id":46},{"landowner_id":36,"listing_id":47},{"landowner_id":26,"listing_id":48},{"landowner_id":82,"listing_id":49},{"landowner_id":88,"listing_id":50},{"landowner_id":80,"listing_id":51},{"landowner_id":8,"listing_id":52},{"landowner_id":11,"listing_id":53},{"landowner_id":62,"listing_id":54},{"landowner_id":26,"listing_id":55},{"landowner_id":85,"listing_id":56},{"landowner_id":72,"listing_id":57},{"landowner_id":74,"listing_id":58},{"landowner_id":4,"listing_id":59},{"landowner_id":47,"listing_id":60},{"landowner_id":68,"listing_id":61},{"landowner_id":98,"listing_id":62},{"landowner_id":67,"listing_id":63},{"landowner_id":19,"listing_id":64},{"landowner_id":62,"listing_id":65},{"landowner_id":19,"listing_id":66},{"landowner_id":82,"listing_id":67},{"landowner_id":86,"listing_id":68},{"landowner_id":91,"listing_id":69},{"landowner_id":6,"listing_id":70},{"landowner_id":46,"listing_id":71},{"landowner_id":65,"listing_id":72},{"landowner_id":58,"listing_id":73},{"landowner_id":81,"listing_id":74},{"landowner_id":18,"listing_id":75},{"landowner_id":59,"listing_id":76},{"landowner_id":31,"listing_id":77},{"landowner_id":84,"listing_id":78},{"landowner_id":78,"listing_id":79},{"landowner_id":76,"listing_id":80},{"landowner_id":18,"listing_id":81},{"landowner_id":40,"listing_id":82},{"landowner_id":37,"listing_id":83},{"landowner_id":85,"listing_id":84},{"landowner_id":97,"listing_id":85},{"landowner_id":100,"listing_id":86},{"landowner_id":79,"listing_id":87},{"landowner_id":37,"listing_id":88},{"landowner_id":12,"listing_id":89},{"landowner_id":56,"listing_id":90},{"landowner_id":83,"listing_id":91},{"landowner_id":8,"listing_id":92},{"landowner_id":47,"listing_id":93},{"landowner_id":95,"listing_id":94},{"landowner_id":19,"listing_id":95},{"landowner_id":85,"listing_id":96},{"landowner_id":96,"listing_id":97},{"landowner_id":16,"listing_id":98},{"landowner_id":8,"listing_id":99},{"landowner_id":70,"listing_id":100},{"landowner_id":66,"listing_id":101},{"landowner_id":67,"listing_id":102},{"landowner_id":26,"listing_id":103},{"landowner_id":61,"listing_id":104},{"landowner_id":8,"listing_id":105},{"landowner_id":79,"listing_id":106},{"landowner_id":13,"listing_id":107},{"landowner_id":87,"listing_id":108},{"landowner_id":91,"listing_id":109},{"landowner_id":18,"listing_id":110},{"landowner_id":37,"listing_id":111},{"landowner_id":30,"listing_id":112},{"landowner_id":27,"listing_id":113},{"landowner_id":14,"listing_id":114},{"landowner_id":28,"listing_id":115},{"landowner_id":36,"listing_id":116},{"landowner_id":55,"listing_id":117},{"landowner_id":29,"listing_id":118},{"landowner_id":9,"listing_id":119},{"landowner_id":73,"listing_id":120},{"landowner_id":76,"listing_id":121},{"landowner_id":70,"listing_id":122},{"landowner_id":20,"listing_id":123},{"landowner_id":82,"listing_id":124},{"landowner_id":88,"listing_id":125},{"landowner_id":83,"listing_id":126},{"landowner_id":10,"listing_id":127},{"landowner_id":21,"listing_id":128},{"landowner_id":39,"listing_id":129},{"landowner_id":19,"listing_id":130},{"landowner_id":27,"listing_id":131},{"landowner_id":30,"listing_id":132},{"landowner_id":89,"listing_id":133},{"landowner_id":18,"listing_id":134},{"landowner_id":92,"listing_id":135},{"landowner_id":85,"listing_id":136},{"landowner_id":53,"listing_id":137},{"landowner_id":14,"listing_id":138},{"landowner_id":65,"listing_id":139},{"landowner_id":58,"listing_id":140},{"landowner_id":71,"listing_id":141},{"landowner_id":37,"listing_id":142},{"landowner_id":89,"listing_id":143},{"landowner_id":79,"listing_id":144},{"landowner_id":58,"listing_id":145},{"landowner_id":86,"listing_id":146},{"landowner_id":31,"listing_id":147},{"landowner_id":51,"listing_id":148},{"landowner_id":98,"listing_id":149},{"landowner_id":99,"listing_id":150},{"landowner_id":15,"listing_id":151},{"landowner_id":100,"listing_id":152},{"landowner_id":8,"listing_id":153},{"landowner_id":60,"listing_id":154},{"landowner_id":45,"listing_id":155},{"landowner_id":67,"listing_id":156},{"landowner_id":42,"listing_id":157},{"landowner_id":17,"listing_id":158},{"landowner_id":85,"listing_id":159},{"landowner_id":58,"listing_id":160},{"landowner_id":38,"listing_id":161},{"landowner_id":93,"listing_id":162},{"landowner_id":34,"listing_id":163},{"landowner_id":97,"listing_id":164},{"landowner_id":90,"listing_id":165},{"landowner_id":55,"listing_id":166},{"landowner_id":65,"listing_id":167},{"landowner_id":81,"listing_id":168},{"landowner_id":53,"listing_id":169},{"landowner_id":71,"listing_id":170},{"landowner_id":99,"listing_id":171},{"landowner_id":52,"listing_id":172},{"landowner_id":84,"listing_id":173},{"landowner_id":4,"listing_id":174},{"landowner_id":26,"listing_id":175},{"landowner_id":3,"listing_id":176},{"landowner_id":17,"listing_id":177},{"landowner_id":79,"listing_id":178},{"landowner_id":39,"listing_id":179},{"landowner_id":41,"listing_id":180},{"landowner_id":25,"listing_id":181},{"landowner_id":92,"listing_id":182},{"landowner_id":46,"listing_id":183},{"landowner_id":87,"listing_id":184},{"landowner_id":93,"listing_id":185},{"landowner_id":88,"listing_id":186},{"landowner_id":94,"listing_id":187},{"landowner_id":3,"listing_id":188},{"landowner_id":67,"listing_id":189},{"landowner_id":91,"listing_id":190},{"landowner_id":45,"listing_id":191},{"landowner_id":100,"listing_id":192},{"landowner_id":95,"listing_id":193},{"landowner_id":54,"listing_id":194},{"landowner_id":85,"listing_id":195},{"landowner_id":38,"listing_id":196},{"landowner_id":6,"listing_id":197},{"landowner_id":98,"listing_id":198},{"landowner_id":69,"listing_id":199},{"landowner_id":2,"listing_id":200},{"landowner_id":99,"listing_id":201},{"landowner_id":62,"listing_id":202},{"landowner_id":14,"listing_id":203},{"landowner_id":17,"listing_id":204},{"landowner_id":9,"listing_id":205},{"landowner_id":77,"listing_id":206},{"landowner_id":50,"listing_id":207},{"landowner_id":56,"listing_id":208},{"landowner_id":40,"listing_id":209},{"landowner_id":56,"listing_id":210},{"landowner_id":100,"listing_id":211},{"landowner_id":19,"listing_id":212},{"landowner_id":56,"listing_id":213},{"landowner_id":4,"listing_id":214},{"landowner_id":15,"listing_id":215},{"landowner_id":95,"listing_id":216},{"landowner_id":77,"listing_id":217},{"landowner_id":79,"listing_id":218},{"landowner_id":36,"listing_id":219},{"landowner_id":10,"listing_id":220},{"landowner_id":35,"listing_id":221},{"landowner_id":83,"listing_id":222},{"landowner_id":66,"listing_id":223},{"landowner_id":98,"listing_id":224},{"landowner_id":78,"listing_id":225},{"landowner_id":84,"listing_id":226},{"landowner_id":40,"listing_id":227},{"landowner_id":96,"listing_id":228},{"landowner_id":21,"listing_id":229},{"landowner_id":2,"listing_id":230},{"landowner_id":39,"listing_id":231},{"landowner_id":35,"listing_id":232},{"landowner_id":64,"listing_id":233},{"landowner_id":48,"listing_id":234}]
       )
     })
 }

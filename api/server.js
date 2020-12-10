@@ -8,7 +8,6 @@ configMiddleware(server)
 const rvRouter = require('../api/rv/rv-router.js')
 const rvAuth = require('../api/auth/auth-router-rv.js')
 const landownerAuth = require('../api/auth/auth-router-lo.js')
-// const landownerRouter = require('../api/landowner/landowner-router.js');
 const listingRouter = require('../api/listing/listing-router.js')
 const reserveRouter = require('../api/reservation/reservation-router.js')
 
