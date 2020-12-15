@@ -1,7 +1,3 @@
-{/**
-package.json
-*/}
-
 {
   "name": "rvairbnb",
   "version": "1.0.0",
@@ -26,6 +22,7 @@ package.json
   },
   "homepage": "https://github.com/Build-Week-RVAirBnB/Backend#readme",
   "dependencies": {
+    "axios": "^0.21.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
