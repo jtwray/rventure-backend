@@ -19,7 +19,12 @@ exports.up = function (knex) {
       tbl.text("title", 255).notNullable();
       tbl.string("price", 255).notNullable();
       tbl.string("address", 255).notNullable();
+      tbl.string('city',255).notNullable()
+      tbl.string('state',255).notNullable()
+      tbl.string('zip',255).notNullable()
       tbl.string("photo", 255);
+      tbl.string("lat").notNullable();
+      tbl.string("lon").notNullable();
       tbl
         .integer("landowner_id")
         .unsigned()
