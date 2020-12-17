@@ -1,6 +1,8 @@
+const axios = require("axios");
 const db = require("../../data/dbConfig.js");
 const list = require("./listing-model.js");
 const router = require("express").Router();
+
 // //MVP
 // 1. Users can register/create an account as either an **RV Owner** or a **Landowner** (web, mobile)
 // 2. **Landowners** and **RV Owners** can login to the the app. (web, mobile)
@@ -12,6 +14,40 @@ const router = require("express").Router();
 /// rv owners need to  view  and deleted all reservations for the listings by date availability
 /// rv owners need to  view  and deleted all reservations for the listings by date availability
 /// rv owners need to create view update and deleted single fav reservations single reservations for the listings by date availability
+
+router.post("/geo_address", (req, res) => {
+  const { latitude, longitude } = req.body;
+  let lat = latitude;
+  let lon = longitude;
+  console.log(
+    "\nreq.body",
+    req.body,
+    "\nreq.body.tucker",
+    req.body.tucker,
+    "\nreq.params",
+    req.params
+  );
+  if (req.body.latitude==undefined|| req.body.longitude==undefined) {
+    res
+      .status(400)
+      .json({
+        message: `latitude and longitude required . submitted with values:\n[\nlat=${latitude}\n&\nlon=${longitude}\n]`,
+      });
+  } else {
+    axios
+      .get(
+        `http://api.positionstack.com/v1/reverse?access_key=${process.env.PS_ID}&query=${lat},${lon}`
+      )
+      .then(({ data }) => {
+        res.status(200).json({ data });
+        console.log({ data });
+      })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).json({ error });
+      });
+  }
+});
 
 router.get("/searchlistings", async (req, res) => {
   console.log("req.BODY", req.body);
@@ -35,6 +71,7 @@ router.get("/searchlistings", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
+  console.log(req.body);
   list
     .find("listing")
     .then((listings) => {
