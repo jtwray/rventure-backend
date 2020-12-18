@@ -1,24 +1,26 @@
-const express = require('express')
-const configMiddleware = require('./configMiddleware')
-const authenticate = require('../api/middleware/authMiddleware')
-const server = express()
-server.use(express.json())
-configMiddleware(server)
+require('dotenv').config();
+const express = require("express");
+const configMiddleware = require("./configMiddleware");
+const authenticate = require("../api/middleware/authMiddleware");
+const server = express();
+server.use(express.json());
+configMiddleware(server);
 
-const rvRouter = require('../api/rv/rv-router.js')
-const rvAuth = require('../api/auth/auth-router-rv.js')
-const landownerAuth = require('../api/auth/auth-router-lo.js')
-const listingRouter = require('../api/listing/listing-router.js')
-const reserveRouter = require('../api/reservation/reservation-router.js')
+const rvRouter = require("../api/rv/rv-router.js");
+const rvAuth = require("../api/auth/auth-router-rv.js");
+const landownerAuth = require("../api/auth/auth-router-lo.js");
+const listingRouter = require("../api/listing/listing-router.js");
+const reserveRouter = require("../api/reservation/reservation-router.js");
 
-server.use('/api/rv', rvRouter)
-server.use('/api/reserve', authenticate, reserveRouter)
-server.use('/api/listing', listingRouter)
-server.use('/auth/landowner', landownerAuth)
-server.use('/auth/rv', rvAuth)
 
-server.get('/api', (req, res) => {
+server.use("/api/rv", rvRouter);
+server.use("/api/reserve", authenticate, reserveRouter);
+server.use("/api/listing", listingRouter);
+server.use("/auth/landowner", landownerAuth);
+server.use("/auth/rv", rvAuth);
 
+
+server.get("/api", (req, res) => {
   res.send(`  
 <html>
 <head>
@@ -76,10 +78,10 @@ By using 5th wheel Airbnb,
   - 💰 and Landowners get to cash-in on otherwise dormant or underutilized land</code></main></og:description>
 <link rel="image_src" href='https://imgur.com/hpzN3f8'>
 </html>
-`)
-})
+`);
+});
 
-server.get('/auth', (req, res) => {
+server.get("/auth", (req, res) => {
   res.send(`   
 <h1>rVenture</h1>
 
@@ -92,11 +94,11 @@ server.get('/auth', (req, res) => {
 <h4><code> POST--|https://rventure.herokuapp.com/auth/rv/login</code></h4>
 <h4><code> POST--|https://rventure.herokuapp.com/auth/landowner/register</code></h4
 <h4><code> POST--|https://rventure.herokuapp.com/auth/landowner/login</code></h4>
-<hr> 🚙`)
-})
+<hr> 🚙`);
+});
 
-server.get('/', (req, res) => {
-  console.log('api:uppp')
+server.get("/", (req, res) => {
+  console.log("api:uppp");
   res.send(`  
 
   <title><h1>rVenture</h1></title>
@@ -105,7 +107,7 @@ server.get('/', (req, res) => {
     <h3>https://rventure.herokuapp.com/api/  🚎  endpoint documentation</h3>
     <hr>
     <h3>https://rventure.herokuapp.com/auth/ 🔐  endpoint documentation</h3>
-    `)
-})
+    `);
+});
 
-module.exports = server
+module.exports = server;
