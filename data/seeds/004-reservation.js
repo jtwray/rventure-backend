@@ -3,7 +3,8 @@ exports.seed = function (knex) {
     .del()
     .then(function () {
       return knex('reservation').insert([
-        {"rvowner_id":20,"listing_id":15,"date":"2022-09-08"},
+        {
+          "rvowner_id":20,"listing_id":15,"date":"2022-09-08"},
       {"rvowner_id":4,"listing_id":19,"date":"2020-11-11"},
       {"rvowner_id":4,"listing_id":7,"date":"2021-12-28"},
       {"rvowner_id":4,"listing_id":18,"date":"2022-06-25"},
@@ -32,3 +33,7 @@ exports.seed = function (knex) {
       {"rvowner_id":17,"listing_id":5,"date":"2022-03-15"}])
     })
 }
+
+
+
+
