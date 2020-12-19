@@ -16,9 +16,8 @@ const router = require("express").Router();
 /// rv owners need to create view update and deleted single fav reservations single reservations for the listings by date availability
 
 router.post("/geo_address", (req, res) => {
-  const { latitude, longitude } = req.body;
-  let lat = latitude;
-  let lon = longitude;
+  const { lat, lon } = req.body;
+
   console.log(
     "\nreq.body",
     req.body,
@@ -27,11 +26,11 @@ router.post("/geo_address", (req, res) => {
     "\nreq.params",
     req.params
   );
-  if (req.body.latitude==undefined|| req.body.longitude==undefined) {
+  if (req.body.lat==undefined|| req.body.lon==undefined) {
     res
       .status(400)
       .json({
-        message: `latitude and longitude required . submitted with values:\n[\nlat=${latitude}\n&\nlon=${longitude}\n]`,
+        message: `latitude and longitude required . submitted with values:\n[\nlat=${lat}\n&\nlon=${lon}\n]`,
       });
   } else {
     axios
