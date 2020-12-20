@@ -8,6 +8,7 @@ module.exports = {
   find,
   findByPatron,
   findByListing,
+  findListingsNotBookedBetween,
   findReservationsByQuery,
   findReservationsByPatronID,
   remove,
@@ -25,7 +26,7 @@ function findById(id) {
     console.log(id);
     return db("listing").where("id", id).first();
   }
-  
+
 // all reservations by rv userid
 function findByPatron(prop, filter) {
 
@@ -40,7 +41,13 @@ function findByListing(prop, filter) {
   }
 
 
-
+function findListingsNotBookedBetween(startDate,endDate){
+    return db('reservation as r')
+    .join('listing as l','l.id','r.listing_id')
+    .raw(`where r.listing_id = null`)
+    .andWhere(function(){this.whereNotBetween('startDate',[startDate,endDate])})
+    .andWhere(function(){this.whereNotBetween('endDate',[startDate,endDate])})
+}
 
 //reservation(s) by user id and listingiD
 function findReservationsByQuery(query) { 
