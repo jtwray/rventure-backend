@@ -71,7 +71,12 @@ exports.up = function (knex) {
         .inTable("listing")
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
-      tbl.date("date").notNullable();
+        tbl
+        .date('startDate')
+        .notNullable()
+        tbl
+        .date('endDate')
+        .notNullable()
     })
     .createTable("landowner_listing", (tbl) => {
       tbl
