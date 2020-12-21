@@ -19,8 +19,12 @@ exports.up = function (knex) {
       tbl.text("title", 255).notNullable();
       tbl.string("price", 255).notNullable();
       tbl.string("address", 255).notNullable();
+      tbl.string('city',255).notNullable()
+      tbl.string('state',255).notNullable()
+      tbl.string('zip',255).notNullable()
       tbl.string("photo", 255);
-      tbl.string("amenities", 255);
+      tbl.string("lat").notNullable();
+      tbl.string("lon").notNullable();
       tbl
         .integer("landowner_id")
         .unsigned()
@@ -29,6 +33,25 @@ exports.up = function (knex) {
         .inTable("landowner")
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
+    })
+    .createTable("amenities", (tbl) => {
+      tbl
+        .integer("listing_id")
+        .unsigned()
+        .notNullable()
+        .references("id")
+        .inTable("listing")
+        .onUpdate("CASCADE")
+        .onDelete("CASCADE");
+      tbl.integer("guests");
+      tbl.integer("beds");
+      tbl.integer("bath");
+      tbl.text("wifi", Boolean);
+      tbl.text("kitchen", Boolean);
+      tbl.text("heat", Boolean);
+      tbl.text("water", Boolean);
+      tbl.text("shower", Boolean);
+      tbl.text("firepit", Boolean);
     })
     .createTable("reservation", (tbl) => {
       tbl.increments();
@@ -48,7 +71,12 @@ exports.up = function (knex) {
         .inTable("listing")
         .onUpdate("CASCADE")
         .onDelete("CASCADE");
-      tbl.string("date", 255).notNullable();
+        tbl
+        .date('startDate')
+        .notNullable()
+        tbl
+        .date('endDate')
+        .notNullable()
     })
     .createTable("landowner_listing", (tbl) => {
       tbl
@@ -94,6 +122,7 @@ exports.down = function (knex) {
     .dropTableIfExists("rvownerfav_listing")
     .dropTableIfExists("landowner_listing")
     .dropTableIfExists("reservation")
+    .dropTableIfExists("amenities")
     .dropTableIfExists("listing")
     .dropTableIfExists("landowner")
     .dropTableIfExists("rv");

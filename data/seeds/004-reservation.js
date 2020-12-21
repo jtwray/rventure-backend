@@ -2,182 +2,36 @@ exports.seed = function (knex) {
   return knex('reservation')
     .del()
     .then(function () {
-      return knex('reservation').insert([
-        {
-          rvowner_id: 14,
-          listing_id: 16,
-          date: '12/6/2019'
-        },
-        {
-          rvowner_id: 20,
-          listing_id: 15,
-          date: '9/8/2022'
-        },
-        {
-          rvowner_id: 4,
-          listing_id: 19,
-          date: '11/11/2020'
-        },
-        {
-          rvowner_id: 4,
-          listing_id: 7,
-          date: '12/28/2021'
-        },
-        {
-          rvowner_id: 4,
-          listing_id: 18,
-          date: '6/25/2022'
-        },
-        {
-          rvowner_id: 12,
-          listing_id: 19,
-          date: '2/25/2022'
-        },
-        {
-          rvowner_id: 11,
-          listing_id: 10,
-          date: '6/18/2019'
-        },
-        {
-          rvowner_id: 9,
-          listing_id: 20,
-          date: '10/10/2021'
-        },
-        {
-          rvowner_id: 10,
-          listing_id: 8,
-          date: '7/18/2020'
-        },
-        {
-          rvowner_id: 4,
-          listing_id: 1,
-          date: '12/9/2020'
-        },
-        {
-          rvowner_id: 10,
-          listing_id: 13,
-          date: '9/29/2020'
-        },
-        {
-          rvowner_id: 5,
-          listing_id: 7,
-          date: '3/5/2019'
-        },
-        {
-          rvowner_id: 20,
-          listing_id: 16,
-          date: '8/1/2021'
-        },
-        {
-          rvowner_id: 20,
-          listing_id: 10,
-          date: '7/31/2021'
-        },
-        {
-          rvowner_id: 5,
-          listing_id: 9,
-          date: '9/5/2021'
-        },
-        {
-          rvowner_id: 8,
-          listing_id: 10,
-          date: '10/16/2019'
-        },
-        {
-          rvowner_id: 15,
-          listing_id: 7,
-          date: '7/20/2020'
-        },
-        {
-          rvowner_id: 13,
-          listing_id: 7,
-          date: '11/19/2020'
-        },
-        {
-          rvowner_id: 2,
-          listing_id: 4,
-          date: '5/2/2020'
-        },
-        {
-          rvowner_id: 3,
-          listing_id: 14,
-          date: '11/30/2019'
-        },
-        {
-          rvowner_id: 16,
-          listing_id: 9,
-          date: '3/14/2020'
-        },
-        {
-          rvowner_id: 15,
-          listing_id: 5,
-          date: '12/16/2019'
-        },
-        {
-          rvowner_id: 14,
-          listing_id: 6,
-          date: '9/17/2019'
-        },
-        {
-          rvowner_id: 13,
-          listing_id: 17,
-          date: '8/10/2022'
-        },
-        {
-          rvowner_id: 11,
-          listing_id: 9,
-          date: '5/5/2021'
-        },
-        {
-          rvowner_id: 8,
-          listing_id: 15,
-          date: '10/20/2022'
-        },
-        {
-          rvowner_id: 5,
-          listing_id: 16,
-          date: '10/3/2022'
-        },
-        {
-          rvowner_id: 9,
-          listing_id: 10,
-          date: '11/18/2021'
-        },
-        {
-          rvowner_id: 5,
-          listing_id: 13,
-          date: '5/28/2021'
-        },
-        {
-          rvowner_id: 1,
-          listing_id: 7,
-          date: '12/27/2019'
-        },
-        {
-          rvowner_id: 8,
-          listing_id: 1,
-          date: '11/22/2020'
-        },
-        {
-          rvowner_id: 14,
-          listing_id: 16,
-          date: '8/1/2019'
-        },
-        {
-          rvowner_id: 8,
-          listing_id: 15,
-          date: '8/7/2020'
-        },
-        {
-          rvowner_id: 17,
-          listing_id: 5,
-          date: '3/15/2022'
-        },
-        {
-          rvowner_id: 17,
-          listing_id: 20,
-          date: '6/29/2022'
-        }
-      ])
+      return knex('reservation').insert(
+    [
+      {"rvowner_id":20,"listing_id":15,"startDate":"2022-09-08","endDate":"2022-09-13"},
+    {"rvowner_id":4,"listing_id":19,"startDate":"2020-11-11","endDate":"2020-11-16"},
+    {"rvowner_id":4,"listing_id":7,"startDate":"2021-12-28","endDate":"2022-01-02"},
+    {"rvowner_id":4,"listing_id":18,"startDate":"2022-06-25","endDate":"2022-06-30"},
+    {"rvowner_id":12,"listing_id":19,"startDate":"2022-02-25","endDate":"2022-02-28"},
+    {"rvowner_id":11,"listing_id":10,"startDate":"2019-06-18","endDate":"2019-06-23"},
+    {"rvowner_id":10,"listing_id":8,"startDate":"2020-07-18","endDate":"2020-07-23"},
+    {"rvowner_id":4,"listing_id":1,"startDate":"2020-12-09","endDate":"2020-12-14"},
+    {"rvowner_id":10,"listing_id":13,"startDate":"2020-09-27","endDate":"2020-09-30"},
+    {"rvowner_id":5,"listing_id":7,"startDate":"2019-03-05","endDate":"2019-03-10"},
+    {"rvowner_id":20,"listing_id":10,"startDate":"2021-07-31","endDate":"2021-08-06"},
+    {"rvowner_id":5,"listing_id":9,"startDate":"2021-09-05","endDate":"2021-09-10"},
+    {"rvowner_id":8,"listing_id":10,"startDate":"2019-10-16","endDate":"2019-10-21"},
+    {"rvowner_id":15,"listing_id":7,"startDate":"2020-07-20","endDate":"2020-07-25"},
+    {"rvowner_id":13,"listing_id":7,"startDate":"2020-11-19","endDate":"2020-11-24"},
+    {"rvowner_id":3,"listing_id":14,"startDate":"2019-11-30","endDate":"2019-12-03"},
+    {"rvowner_id":16,"listing_id":9,"startDate":"2020-03-14","endDate":"2020-03-19"},
+    {"rvowner_id":15,"listing_id":5,"startDate":"2019-12-16","endDate":"2019-12-21"},
+    {"rvowner_id":13,"listing_id":17,"startDate":"2022-08-10","endDate":"2022-08-15"},
+    {"rvowner_id":11,"listing_id":9,"startDate":"2021-05-05","endDate":"2021-05-10"},
+    {"rvowner_id":8,"listing_id":15,"startDate":"2022-10-20","endDate":"2022-10-25"},
+    {"rvowner_id":9,"listing_id":10,"startDate":"2021-11-18","endDate":"2021-11-23"},
+    {"rvowner_id":5,"listing_id":13,"startDate":"2021-05-28","endDate":"2021-06-03"},
+    {"rvowner_id":1,"listing_id":7,"startDate":"2019-12-27","endDate":"2020-12-02"},
+    {"rvowner_id":8,"listing_id":1,"startDate":"2020-11-22","endDate":"2020-11-27"},
+    {"rvowner_id":8,"listing_id":15,"startDate":"2021-02-08","endDate":"2021-02-13"},
+    {"rvowner_id":17,"listing_id":5,"startDate":"2022-03-15","endDate":"2022-03-20"}
+  ]      
+      )
     })
 }

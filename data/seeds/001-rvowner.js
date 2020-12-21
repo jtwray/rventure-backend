@@ -101,6 +101,7 @@ exports.seed = function (knex) {
       email: 'jmcbrierj@craigslist.org',
       password: 'zJ00pLqMpJM2',
       contact: '373-675-2772'
-    }]
+    },
+    ]
   )
 }

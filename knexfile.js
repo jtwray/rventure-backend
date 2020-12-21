@@ -1,14 +1,15 @@
+require('dotenv').config()
 module.exports = {
   production: {
     client: "pg",
     connection: process.env.DATABASE_URL,
-    pool: { min: 2, max: 10 },
+    pool: { min: 0, max: 15 },
     migrations: {
       directory: "./data/migrations",
     },
     seeds: {
       directory: "./data/seeds",
-    }
+    },
   },
   // development: {
   //   client: "pg",
@@ -30,8 +31,9 @@ module.exports = {
       directory: "./data/migrations",
     },
     seeds: {
-      directory: "./data/seeds"
-    }
+      directory: "./data/seeds",
+    },
+    debug: true,
   },
 
   testing: {
@@ -51,6 +53,6 @@ module.exports = {
     },
     seeds: {
       directory: "./data/seeds",
-    }
-  }
+    },
+  },
 };

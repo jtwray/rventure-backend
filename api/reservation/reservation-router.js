@@ -7,7 +7,7 @@ const router = require('express').Router()
 // })
 // module.exports = router;
 
-const Reserve = require('../listing/listing-model.js')
+const Reserve = require('./reservation-model.js')
 
 /// reservations =>get all
 /// reservations =>get all and crud by id
@@ -23,7 +23,7 @@ const Reserve = require('../listing/listing-model.js')
 /// rv owners need to  view  and deleted all reservations for the reservations by date availability
 /// rv owners need to  view  and deleted all reservations for the reservations by date availability
 /// rv owners need to create view update and deleted single fav reservations single reservations for the reservations by date availability
-
+//get all reservations all of them!
 router.get('/', async (req, res) => {
   Reserve.find('reservation')
     .then(reservations => {
@@ -43,8 +43,48 @@ router.get('/', async (req, res) => {
     })
 })
 
-// hardcode reservation by req.params.id
-// this can return reservations by owner or reservation id
+// all reservations by userid
+router.get('/:rvid', async (req, res) => {
+
+  Reserve.findReservationsByPatronID(req.params.rvid)
+    .then(reservations => {
+      reservations.length == undefined
+        ? res
+          .status(404)
+          .json({ message: 'the reservations could not be found' })
+        : reservations.length == 0
+          ? res.status(200).json({ message: 'No reservations returned for this user. ' })
+          : res.status(200).json({ reservations })
+    })
+    .catch(error => {
+      res.status(500).json({
+        error: `there was an error on the server while attempting to retrieve the reservations.--+${error}`
+      })
+      console.error(error)
+    })
+})
+//api.reserve.rvid12/listingid5 put or delete on these
+//api/reserve/tvid get all reservations 
+//api/reserve/tvid/fav get all fav past reservations 
+
+// reservation by req.params.id rvowner_id & listing_id
+
+router.get('/:rvid/listing/:listingid', async (req, res) => {
+  Reserve.findReservationByQuery({"rvowner_id": req.params.rvid,"listing_id":req.params.listingid})
+    .then(singlereservation => {
+      singlereservation.length == 0 || undefined
+        ? res
+          .status(404)
+          .json({ message: 'the reservation could not be found' })
+        : res.status(200).json({ singlereservation })
+    })
+    .catch(error => {
+      res.status(500).json({ message: error })
+      console.error(error)
+    })
+})
+
+//get reservation by pg defined index returns data rvid listingid
 router.get('/:id', async (req, res) => {
   Reserve.findBy('reservation', req.params.id)
     .then(singlereservation => {
@@ -60,9 +100,11 @@ router.get('/:id', async (req, res) => {
     })
 })
 
-// hardcode add new reservation by req.body
+//  add new reservation by req.body
 router.post('/', async (req, res) => {
-  Reserve.addReserve(req.body, 'reservation')
+  let {rvowner_id,listing_id}=req.body
+ console.log('lets add a reservation',req.body)
+  Reserve.reserveListing(req.body, 'reservation')
     .then(reservationUp => {
       res.status(201).json({ 'newreservation added': reservationUp })
     })
