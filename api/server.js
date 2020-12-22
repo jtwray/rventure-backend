@@ -6,13 +6,14 @@ const server = express();
 server.use(express.json());
 configMiddleware(server);
 
+const searchRouter=require('../api/search/search-router.js')
 const rvRouter = require("../api/rv/rv-router.js");
 const rvAuth = require("../api/auth/auth-router-rv.js");
 const landownerAuth = require("../api/auth/auth-router-lo.js");
 const listingRouter = require("../api/listing/listing-router.js");
 const reserveRouter = require("../api/reservation/reservation-router.js");
 
-
+server.use('/api/search', searchRouter);
 server.use("/api/rv", rvRouter);
 server.use("/api/reserve", authenticate, reserveRouter);
 server.use("/api/listing", listingRouter);
