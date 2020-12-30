@@ -1,4 +1,6 @@
 # Backend
+
+[![Heroku App Status](http://heroku-shields.herokuapp.com/rvadventures)](https://rvadventures.herokuapp.com)
 ### techstack
   Node | Express | Knex | Postgres | SQL | Heroku | Integration Tests | Supertest | JWT
 
