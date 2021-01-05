@@ -3,41 +3,46 @@
   "version": "1.0.0",
   "description": "||| rVenture-[rvAirbnb_5thWheel] |||cross-functional BUILD sprint 30 hours ||Node-Expressjs React-DOM postgreSQL Less jestDom react/testing-library||",
   "main": "index.js",
-  "scripts": {
-    "server": "nodemon index.js",
-    "test": "cross-env DB_ENV=testing jest --watch --verbose",
-    "start": "node index.js"
-  },
-  "jest": {
-    "testEnvironment": "node"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Build-Week-RVAirBnB/Backend.git"
-  },
-  "author": "tucker wray| jtwray",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Build-Week-RVAirBnB/Backend/issues"
-  },
-  "homepage": "https://github.com/Build-Week-RVAirBnB/Backend#readme",
   "dependencies": {
     "axios": "^0.21.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
-    "express": "^5.0.0-alpha.8",
+    "express": "^4.17.1",
     "helmet": "^4.2.0",
-    "jest": "^26.6.3",
     "jsonwebtoken": "^8.5.1",
     "knex": "^0.21.13",
     "knex-cleaner": "^1.3.1",
-    "morgan": "^1.10.0",
     "pg": "^8.5.1"
   },
   "devDependencies": {
     "cross-env": "^7.0.3",
+    "jest": "^26.6.3",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.6",
     "supertest": "^6.0.1"
+  }
+    "scripts": {
+    "server": "nodemon index.js",
+    "test": "cross-env DB_ENV=testing jest --watch --verbose",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Build-Week-RVAirBnB/Backend.git"
+  },
+  "author": "jtwray",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Build-Week-RVAirBnB/Backend/issues"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!**/node_modules/**",
+      "!**/vendor/**",
+      "!**/__tests__/**"
+    ]
   }
 }
