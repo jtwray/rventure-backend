@@ -54,102 +54,41 @@ router.post("/price", (req, res) => {
     });
 });
 
-router.post("/location", (req, res) => {
-	const { within, location } = req.body.searchTerms;
-	const {lat,lon,zip,city,state}=location;
-	
-if(lat&& !lon || lon&& !lat){  res.status(400).json({
-	message: `Bad request:Client should not repeat the request without Modifications.`,
-	Modifications: `Received values: latitude:${lat} longitude:${lon}.\n A complete 'latitude' and 'longitude' pair is required for a latitude/longitude query. Submit both or alter the query to search for listings using a zip code or city & state combination.  --searchListingsAvailableByLocation--.`,
-});
-}
-  location.zip ? "" : "";
-  location.city ? "" : "";
-  location.state ? "" : "";
-  location.lat ? "" : "";
-	location.lon ? "" : "";
-	
-
-	{/**
-	check for lat/lon,range
-	if present 
-	plug in to db helper model with the range or range = 50 miles
-
-	if lat/lon not present  
-	checkfor city/state/zip
-
-	plug those into 3rd party HERE API
-
-	use resulting lat/lon with provided or default range in dbhelper=model
-
-
-	*/}
-  if (!min_price || !max_price) {
-  
-  console.log({ min_price }, { max_price });
-  search
-    .findListingsByPrice(min_price, max_price)
-    .then((listings) =>
-      listings.length === undefined
-        ? res.status(404).json({ message: "the listings could not be found" })
-        : listings.length === 0
-        ? res
-            .status(204)
-            .json({ message: "No Listings matching these criteria." })
-        : res.status(200).json({ listings: listings, count: listings.length })
+function convertAddressToLatLon(address) {
+  axios
+    .post(
+      `http://api.positionstack.com/v1/forward?access_key=${process.env.PS_ID}&query=${address}`
     )
-    .catch((err) => {
-      res.status(500).json({
-        error: `There was an error on the server while attempting to search for listings with those parameters. --${err}.`,
-      });
+    .then((results) => {
+      return results;
+    })
+    .catch(
+      (err) => console.error({ err }),
+      res.status(500).json({ error: err })
+    );
+}
+
+router.post("/location", async (req, res) => {
+  const { range, searchLocation } = req.body.searchTerms;
+  let { zip, city, state, lat, lon } = searchLocation;
+  console.log("req.body", req.body);
+  if (zip || (city && state)) {
+    let address = zip || `${city},${state}`;
+    let { lat, lon } = convertAddressToLatLon(address);
+  }
+  if (lat && lon) {
+    search
+      .findListingByLatLonRange(lat, lon, range)
+      .then((listings) => res.status(209).json({ listings }))
+      .catch((err) => res.status(500).json({ error: err }));
+  }
+
+  if ((lat && !lon) || (lon && !lat)) {
+    res.status(400).json({
+      message: `Bad request:Client should not repeat the request without Modifications.`,
+      Modifications: `Received values: latitude:${lat} longitude:${lon}.\n A complete 'latitude' and 'longitude' pair is required for a latitude/longitude query. Submit both or alter the query to search for listings using a zip code or city & state combination.  --searchListingsAvailableByLocation--.`,
     });
+  }
 });
 
 module.exports = router;
-
-{
-  /**
-
-uper
-
-UNDERSTAND
-search by location:
- - lat/lon or
- - zipcode or
- - city/state
-
-need to convert the provided data into lat/lon
- either e=convert on client or server side
-
-client side
-2 unknowns:
- - network speed/strength is it high latency 2g/3g vs high speed wifi or 4g / 5g
- - client pc/phone strength low ram no ram etc
-	-- thinking its a small enough computation this is a nonfactor unless need to reach 3rd party apis then definitely use server side
-
- server side very predictable latency and compute strength
-
- transferring a small data footprint
-	gather data and convert on backend
-	
- 
-
-PLAN
-take the inputs and convert them to lat lon on the servern uin 3rd party api
-
-send gathered data to backend and convert to lat lon
-
-search database for any listings within provided range of deciphered lat/lon
-
-gather zip|city,state|lat/lon
-
-convert to lat/lon with 3rd party api
-
-retrieve listings withing provided radius of computed lat/lon
-
-EXECUTE
-
-REVIEW/REFACTOR
-
-*/
-}
