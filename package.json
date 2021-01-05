@@ -21,7 +21,7 @@
     "morgan": "^1.10.0",
     "nodemon": "^2.0.6",
     "supertest": "^6.0.1"
-  }
+  },
     "scripts": {
     "server": "nodemon index.js",
     "test": "cross-env DB_ENV=testing jest --watch --verbose",
