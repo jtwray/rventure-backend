@@ -65,7 +65,31 @@
   "devDependencies": {
     "cross-env": "^7.0.3",
     "jest": "^26.6.3",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.6",
     "supertest": "^6.0.1"
+  },
+    "scripts": {
+    "server": "nodemon index.js",
+    "test": "cross-env DB_ENV=testing jest --watch --verbose",
+    "start": "node index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Build-Week-RVAirBnB/Backend.git"
+  },
+  "author": "jtwray",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Build-Week-RVAirBnB/Backend/issues"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "collectCoverageFrom": [
+      "**/*.js",
+      "!**/node_modules/**",
+      "!**/vendor/**",
+      "!**/__tests__/**"
+    ]
   }
 }
