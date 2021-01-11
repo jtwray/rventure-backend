@@ -54,26 +54,12 @@ router.post("/price", (req, res) => {
     });
 });
 
-function convertAddressToLatLon(address) {
-  axios
-    .post(
-      `http://api.positionstack.com/v1/forward?access_key=${process.env.PS_ID}&query=${address}`
-    )
-    .then((results) => {
-      return results;
-    })
-    .catch(
-      (err) => console.error({ err }),
-      res.status(500).json({ error: err })
-    );
-}
-
 router.post("/location", async (req, res) => {
   let { zip, city, state, lat, lon, range } = req.body;
   console.log("req.body", req.body);
   if (zip || (city && state)) {
     let address = zip || `${city},${state}`;
-    let { lat, lon } = convertAddressToLatLon(address);
+    let { lat, lon } = search.convertAddressToLatLon(address);
   }
   if (lat && lon) {
     search
