@@ -2,7 +2,7 @@ const router = require("express").Router();
 const search = require("./search-model.js");
 
 router.post("/dates", (req, res) => {
-  const { start_date, end_date } = req.body.searchTerms;
+  const { start_date, end_date } = req.body;
   if (!start_date || !end_date) {
     res.status(400).json({
       message: `Bad request:Client should not repeat the request without Modifications.`,
@@ -28,7 +28,7 @@ router.post("/dates", (req, res) => {
 });
 
 router.post("/price", (req, res) => {
-  const { min_price, max_price } = req.body.searchTerms;
+  const { min_price, max_price } = req.body;
   if (!min_price || !max_price) {
     res.status(400).json({
       message: `Bad request:Client should not repeat the request without Modifications.`,
@@ -69,8 +69,7 @@ function convertAddressToLatLon(address) {
 }
 
 router.post("/location", async (req, res) => {
-  const { range, searchLocation } = req.body.searchTerms;
-  let { zip, city, state, lat, lon } = searchLocation;
+  let { zip, city, state, lat, lon, range } = req.body;
   console.log("req.body", req.body);
   if (zip || (city && state)) {
     let address = zip || `${city},${state}`;
