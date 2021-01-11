@@ -1,6 +1,7 @@
 const db = require("../../data/dbConfig.js");
-
+import axios from 'axios'
 module.exports = {
+  convertAddressToLatLon,
   find,
   findBy,
   findById,
@@ -25,6 +26,21 @@ function findListingsNotReservedOnDate(startDate, endDate) {
 // return db.raw(`SELECT  r.*,l.* FROM listing as l LEFT JOIN reservation as r ON l.id = r.listing_id WHERE r.listing_id IS NULL or r."startDate" not between '${startDate}' and '${endDate}' and r."endDate" not between '${startDate}' and '${endDate}' order by r."startDate"`)
 function find() {
   return db("rv").select("id", "username", "password");
+}
+
+
+function convertAddressToLatLon(address) {
+  axios
+    .post(
+      `http://api.positionstack.com/v1/forward?access_key=${process.env.PS_ID}&query=${address}`
+    )
+    .then((results) => {
+      return results;
+    })
+    .catch(
+      (err) => console.error({ err }),
+      res.status(500).json({ error: err })
+    );
 }
 
 function findListingsByAddress(min_price, max_price) {}
