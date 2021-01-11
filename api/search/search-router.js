@@ -54,7 +54,6 @@ router.post("/price", (req, res) => {
     });
 });
 
-
 router.post("/location", async (req, res) => {
   const { range, searchLocation } = req.body.searchTerms;
   let { zip, city, state, lat, lon } = searchLocation;

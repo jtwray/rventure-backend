@@ -1,5 +1,5 @@
 const db = require("../../data/dbConfig.js");
-import axios from 'axios'
+const axios = require("axios")
 module.exports = {
   convertAddressToLatLon,
   find,
@@ -27,7 +27,6 @@ function findListingsNotReservedOnDate(startDate, endDate) {
 function find() {
   return db("rv").select("id", "username", "password");
 }
-
 
 function convertAddressToLatLon(address) {
   axios
