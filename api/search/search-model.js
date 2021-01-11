@@ -7,6 +7,8 @@ module.exports = {
   add,
   findListingsNotReservedOnDate,
   findListingsByPrice,
+  findListingsByAddress,
+  findListingsByLatLonRange,
 };
 
 function findListingsNotReservedOnDate(startDate, endDate) {
@@ -25,6 +27,19 @@ function find() {
   return db("rv").select("id", "username", "password");
 }
 
+function findListingsByAddress(min_price, max_price) {}
+function findListingsByLatLonRange(lat, lon, range) {
+  let min_lat, max_lat, min_lon, max_lon;
+  min_lat = lat - range;
+  min_lon = lon - range;
+  max_lat = lat + range;
+  max_lon = lon + range;
+  return db("listing as l")
+    .join("amenities as a ", "l.id", "a.listing_id")
+    .whereBetween("l.lat", [min_lat, max_lat])
+    .andWhereBetween("l.lon", [min_lon, max_lon])
+    .select("l.*", "a.*");
+}
 function findListingsByPrice(min_price, max_price) {
   return db("listing as l")
     .join("amenities as a", "l.id", "a.listing_id")
