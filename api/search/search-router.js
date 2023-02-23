@@ -1,8 +1,10 @@
 const router = require("express").Router();
 const search = require("./search-model.js");
+const axios = require("axios");
 
 router.post("/dates", (req, res) => {
-  const { start_date, end_date } = req.body.searchTerms;
+  const { start_date, end_date } = req.body;
+  console.log({ start_date, end_date })
   if (!start_date || !end_date) {
     res.status(400).json({
       message: `Bad request:Client should not repeat the request without Modifications.`,
@@ -15,10 +17,10 @@ router.post("/dates", (req, res) => {
       listings.length === undefined
         ? res.status(404).json({ message: "the listings could not be found" })
         : listings.length === 0
-        ? res
+          ? res
             .status(204)
             .json({ message: "No Listings matching these criteria." })
-        : res.status(200).json({ listings: listings, count: listings.length })
+          : (res.status(200).json({ listings: listings, count: listings.length }), console.log({ listings }))
     )
     .catch((err) => {
       res.status(500).json({
@@ -28,7 +30,7 @@ router.post("/dates", (req, res) => {
 });
 
 router.post("/price", (req, res) => {
-  const { min_price, max_price } = req.body.searchTerms;
+  const { min_price, max_price } = req.body;
   if (!min_price || !max_price) {
     res.status(400).json({
       message: `Bad request:Client should not repeat the request without Modifications.`,
@@ -42,10 +44,10 @@ router.post("/price", (req, res) => {
       listings.length === undefined
         ? res.status(404).json({ message: "the listings could not be found" })
         : listings.length === 0
-        ? res
+          ? res
             .status(204)
             .json({ message: "No Listings matching these criteria." })
-        : res.status(200).json({ listings: listings, count: listings.length })
+          : res.status(200).json({ listings: listings, count: listings.length })
     )
     .catch((err) => {
       res.status(500).json({
@@ -53,27 +55,41 @@ router.post("/price", (req, res) => {
       });
     });
 });
+function convertAddressToLatLon(address) { }
 
 router.post("/location", async (req, res) => {
-  const { range, searchLocation } = req.body.searchTerms;
-  let { zip, city, state, lat, lon } = searchLocation;
+  let { zip, city, state, lat, lon, range } = req.body;
+
   console.log("req.body", req.body);
+
   if (zip || (city && state)) {
     let address = zip || `${city},${state}`;
-    let { lat, lon } = search.convertAddressToLatLon(address);
-  }
-  if (lat && lon) {
-    search
-      .findListingByLatLonRange(lat, lon, range)
-      .then((listings) => res.status(209).json({ listings }))
-      .catch((err) => res.status(500).json({ error: err }));
-  }
-
-  if ((lat && !lon) || (lon && !lat)) {
-    res.status(400).json({
-      message: `Bad request:Client should not repeat the request without Modifications.`,
-      Modifications: `Received values: latitude:${lat} longitude:${lon}.\n A complete 'latitude' and 'longitude' pair is required for a latitude/longitude query. Submit both or alter the query to search for listings using a zip code or city & state combination.  --searchListingsAvailableByLocation--.`,
-    });
+    console.log({ address });
+    axios
+      .get(
+        `http://api.positionstack.com/v1/forward?access_key=${process.env.PS_ID
+        }&query=${address}`
+      )
+      .then(({ data }) => {
+        console.log("1", data.data[0].latitude)
+        let { latitude, longitude } = data.data[0]
+        if (latitude && longitude) {
+          console.log(latitude, longitude)
+          search
+            .findListingsByLatLonRange(latitude, longitude, range)
+            .then((listings) => res.status(209).json({ listings }))
+            .catch((err) => res.status(500).json({ err }, { message: 'server error' }));
+        }
+        if ((latitude && !longitude) || (longitude && !latitude)) {
+          res.status(400).json({
+            message: `Bad request:Client should not repeat the request without Modifications.`,
+            Modifications: `Received values: latitude:${latitude} longitude:${longitude}.\n A complete 'latitude' and 'longitude' pair is required for a latitude/longitude query. Submit both or alter the query to search for listings using a zip code or city & state combination.  --searchListingsAvailableByLocation--.`,
+          });
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({ err });
+      });
   }
 });
 
