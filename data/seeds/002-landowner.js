@@ -4,12 +4,13 @@ exports.seed = function (knex) {
     .del()
     .then(function () {
       // Inserts seed entries
-      return knex("landowner").insert([
+      return knex("landowner").insert(
+        [
         {
-          username: "fskermer0",
-          email: "jcakebread0@4shared.com",
-          password: "TAojEZvD",
-          contact: "903-620-8852",
+          username: "just",
+          email: "jcakebread@lo.com",
+          password: "cakebread",
+          contact: "276-734-3811",
         },
         {
           username: "pverson1",
@@ -605,6 +606,7 @@ exports.seed = function (knex) {
           password: "n4Q8lVn4Q8lV",
           contact: "738-671-1605",
         },
-      ]);
+      ]
+      );
     });
 };
