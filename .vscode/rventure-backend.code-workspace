@@ -6,7 +6,7 @@
 	],
 	"settings": {
 		"window.autoDetectColorScheme": false,
-		"workbench.colorTheme": "Peacocks In Space Contrast (rainglow)",
+		"workbench.colorTheme": "Noctis Hibernus",
 		"terminal.integrated.rightClickBehavior": "default",
 		"emmet.includeLanguages": {
 			"typescript": "typescriptreact",
