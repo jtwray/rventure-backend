@@ -80,7 +80,7 @@ router.post("/location", async (req, res) => {
             .then((listings) => res.status(209).json({ listings }))
             .catch((err) => res.status(500).json({ err }, { message: 'server error' }));
         }
-        if ((latitude && !longitude) || (longitude && !latitude)) {
+        if ((!longitude || !latitude)) {
           res.status(400).json({
             message: `Bad request:Client should not repeat the request without Modifications.`,
             Modifications: `Received values: latitude:${latitude} longitude:${longitude}.\n A complete 'latitude' and 'longitude' pair is required for a latitude/longitude query. Submit both or alter the query to search for listings using a zip code or city & state combination.  --searchListingsAvailableByLocation--.`,

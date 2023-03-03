@@ -26,7 +26,7 @@ router.post("/geo_address", (req, res) => {
     "\nreq.params",
     req.params
   );
-  if (req.body.lat==undefined|| req.body.lon==undefined) {
+  if (req.body.lat == undefined || req.body.lon == undefined) {
     res
       .status(400)
       .json({
@@ -56,10 +56,10 @@ router.get("/searchlistings", async (req, res) => {
       listings.length === undefined
         ? res.status(404).json({ message: "the listings could not be found" })
         : listings.length === 0
-        ? res
+          ? res
             .status(200)
             .json({ message: "No Listings matching these criteria." })
-        : res.status(200).json({ listings })
+          : res.status(200).json({ listings })
     )
     .catch((error) => {
       res.status(500).json({
@@ -77,8 +77,8 @@ router.get("/", async (req, res) => {
       listings.length === undefined
         ? res.status(404).json({ message: "the listings could not be found" })
         : listings.length === 0
-        ? res.status(200).json({ message: "No listings. " })
-        : res.status(200).json({ listings });
+          ? res.status(200).json({ listings, message: "No listings. " })
+          : res.status(200).json({ listings });
     })
     .catch((error) => {
       res.status(500).json({
@@ -128,8 +128,8 @@ router.put("/:id", (req, res) => {
       updatedListing.length == 0 || undefined
         ? res.status(404).json({ message: "the listing could not be found" })
         : res
-            .status(200)
-            .json({ message: "Listing updated successfully", updatedListing });
+          .status(200)
+          .json({ message: "Listing updated successfully", updatedListing });
     })
     .catch((error) => {
       console.log("PUT /api/user/:id Error", error);
