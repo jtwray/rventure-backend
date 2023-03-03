@@ -1,4 +1,4 @@
-require('dotenv').config()
+require("dotenv").config();
 module.exports = {
   production: {
     client: "pg",
@@ -35,7 +35,6 @@ module.exports = {
     },
     debug: true,
   },
-
   testing: {
     client: "sqlite3",
     useNullAsDefault: true,
