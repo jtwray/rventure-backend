@@ -1,5 +1,18 @@
 {
     "cSpell.words": [
         "positionstack"
-    ]
+    ],
+    "window.autoDetectColorScheme": false,
+    "workbench.colorTheme": "Peacocks In Space Contrast (rainglow)",
+    "terminal.integrated.rightClickBehavior": "default",
+    "emmet.includeLanguages": {
+        "typescript": "typescriptreact",
+        "javascriptreact": "javascriptreact"
+    },
+    "auto-rename-tag.activationOnLanguage": [
+
+        "*"
+    ],
+    "editor.foldingImportsByDefault": true,
+    "isort.check": true
 }
