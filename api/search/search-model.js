@@ -1,7 +1,6 @@
 const db = require("../../data/dbConfig.js");
-const axios = require("axios")
+
 module.exports = {
-  convertAddressToLatLon,
   find,
   findBy,
   findById,
@@ -15,6 +14,7 @@ module.exports = {
 function findListingsNotReservedOnDate(startDate, endDate) {
   // let vacancies,notbooked;
   // [...vacancies,..notbooked]
+  console.log({startDate,endDate});
   return db("reservation as r")
     .join("listing as l", "r.listing_id", "l.id")
     .where("r.listing_id", null)
@@ -28,31 +28,17 @@ function find() {
   return db("rv").select("id", "username", "password");
 }
 
-function convertAddressToLatLon(address) {
-  axios
-    .post(
-      `http://api.positionstack.com/v1/forward?access_key=${process.env.PS_ID}&query=${address}`
-    )
-    .then((results) => {
-      return results;
-    })
-    .catch(
-      (err) => console.error({ err }),
-      res.status(500).json({ error: err })
-    );
-}
-
 function findListingsByAddress(min_price, max_price) {}
 function findListingsByLatLonRange(lat, lon, range) {
-  let min_lat, max_lat, min_lon, max_lon;
-  min_lat = lat - range;
-  min_lon = lon - range;
-  max_lat = lat + range;
-  max_lon = lon + range;
+  let min_lat = lat - range,
+    max_lat = lat + range,
+    min_lon = lon - range,
+    max_lon = lon + range;
+  console.log({ min_lat, max_lat }, { min_lon, max_lon }, range);
   return db("listing as l")
     .join("amenities as a ", "l.id", "a.listing_id")
-    .whereBetween("l.lat", [min_lat, max_lat])
-    .andWhereBetween("l.lon", [min_lon, max_lon])
+    .whereBetween("l.lat", [`${min_lat}`,` ${max_lat}`])
+    .andWhereBetween("l.lon", [`${min_lon}`,`${max_lon}`])
     .select("l.*", "a.*");
 }
 function findListingsByPrice(min_price, max_price) {

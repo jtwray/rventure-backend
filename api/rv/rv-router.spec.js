@@ -17,14 +17,14 @@ describe('auth-router', () => {
         .send({ username: 'bigJohn', password: 'password', email: 't@w.com' });
 
       expect(newUser.type).toEqual('application/json');
-      expect(newUser.text).toMatch(/.+\..+\..+/); // -----DATA-----post/auth/login/rv
-      expect(newUser.text).toMatch(/'id'/); // -----DATA-----post/auth/login/rv
+      expect(newUser.text).toMatch(/.+\..+\../);   // -----DATA-----post/auth/login/rv
+      expect(newUser.text).toMatch(/'id'/);       // -----DATA-----post/auth/login/rv
       expect(newUser.text).toMatch(/username/); // -----DATA-----post/auth/login/rv
-      expect(newUser.text).toMatch(/token/); // -----DATA-----post/auth/login/rv
+      expect(newUser.text).toMatch(/token/);  // -----DATA-----post/auth/login/rv
       expect(newUser.status).toBe(201);
     });
-    //    \\----test register/   type|status|data-----  //
-    //     \\******************************************//
+    //      \\ ---test register/   type|status|data----  //
+    //      \\*****************************************//
     //* ***********************************************************************
     //* ***********************************************************************
 

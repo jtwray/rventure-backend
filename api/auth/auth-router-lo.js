@@ -43,7 +43,7 @@ router.post('/login/', checkfor('username'), checkfor('password'), (req, res) =>
       } else {
         res.status(401).json({ message: 'Invalid Credentials' })
       }
-    }).catch(error => { res.status(500).json(error); console.error(error) })
+    }).catch(error => { res.status(500).json(error); console.error({error}) })
 })
 
 function genToken (landowner) {
