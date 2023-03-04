@@ -4,7 +4,6 @@ const axios = require("axios");
 
 router.post("/dates", (req, res) => {
   const { start_date, end_date } = req.body;
-  console.log({ start_date, end_date })
   if (!start_date || !end_date) {
     res.status(400).json({
       message: `Bad request:Client should not repeat the request without Modifications.`,
@@ -59,9 +58,6 @@ function convertAddressToLatLon(address) { }
 
 router.post("/location", async (req, res) => {
   let { zip, city, state, lat, lon, range } = req.body;
-
-  console.log("req.body", req.body);
-
   if (zip || (city && state)) {
     let address = zip || `${city},${state}`;
     console.log({ address });
